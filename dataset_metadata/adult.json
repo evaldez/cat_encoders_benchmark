@@ -1,0 +1,28 @@
+{
+    "dataset_name":"adult",
+    "relative_path_to_dataset":"./datasets/adult/train_dataset.csv",
+    "id_cols": [],
+    "cat_cols": [
+        "workclass", 
+        "education", 
+        "marital-status", 
+        "occupation", 
+        "relationship", 
+        "race", 
+        "gender", 
+        "native-country"
+    ],
+    "num_cols" : [
+        "age",
+        "educational-num",
+        "capital-gain",
+        "capital-loss",
+        "hours-per-week"
+    ],
+    "cols_to_delete":[
+        "fnlwgt"
+    ],
+    "time_cols": [],
+    "target":"income",
+    "positive_values_are_represented_by": ">50K"
+}

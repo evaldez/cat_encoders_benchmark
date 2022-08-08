@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,XGBClassifier,CesamoEncoder,0.7094554240067368,2.2021984259287515,2022-08-08 17:36:59

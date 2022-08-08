@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,MLPClassifier,CatBoostEncoder,0.6515948082605997,3.219616413116455,2022-08-08 15:01:42
