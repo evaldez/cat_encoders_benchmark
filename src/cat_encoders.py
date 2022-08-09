@@ -1,5 +1,6 @@
 import category_encoders as ce
 from cesamo.CesamoEncoder import CesamoEncoder
+from random_encoder.RandomEncoder import RandomEncoder
 
 
 def set(cat_cols, encoder_list):
@@ -52,6 +53,11 @@ def set(cat_cols, encoder_list):
             "encoder_name":"CesamoEncoder",
             "encoder_obj":CesamoEncoder(cat_cols)
         },
+        {
+            "encoder_name":"RandomEncoder",
+            "encoder_obj":RandomEncoder(cat_cols)
+            
+        }
         
     ]
     final_encoders=[]    

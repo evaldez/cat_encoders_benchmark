@@ -1,2 +1,0 @@
-dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
-adult,XGBClassifier,CatBoostEncoder,0.6906338720676242,1.752192735671997,2022-08-08 15:01:09

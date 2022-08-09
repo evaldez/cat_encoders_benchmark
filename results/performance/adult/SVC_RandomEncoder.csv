@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,SVC,RandomEncoder,0.6267556057014716,14.319089571634928,2022-08-09 15:35:17

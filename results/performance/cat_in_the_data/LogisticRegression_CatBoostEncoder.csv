@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+cat_in_the_data,LogisticRegression,CatBoostEncoder,0.5141371851321289,3.580951452255249,2022-08-09 17:35:22

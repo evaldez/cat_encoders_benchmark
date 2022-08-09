@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+cat_in_the_data,RandomForestClassifier,OrdinalEncoder,0.2616535786262875,31.515167315800984,2022-08-09 17:37:06

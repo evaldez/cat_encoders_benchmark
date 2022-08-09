@@ -12,8 +12,9 @@ import time
 from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 from sklearn.neural_network import MLPClassifier
-
-
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
 def set(models_list):
     all_models_available = [
@@ -23,9 +24,24 @@ def set(models_list):
         },
         {
             "model_name":"MLPClassifier",
-            "model_obj":MLPClassifier(solver='adam', activation="relu", alpha=1e-5, max_iter=2000,hidden_layer_sizes=(64, 64, 64), random_state=1)
+            "model_obj":MLPClassifier(solver='adam', activation="relu",hidden_layer_sizes=(25, 25, 25), random_state=1)
         },
-
+        {
+            "model_name":"GaussianNB",
+            "model_obj":GaussianNB()
+        },
+        {
+            "model_name":"LogisticRegression",
+            "model_obj":LogisticRegression()
+        },
+        {
+            "model_name":"SVC",
+            "model_obj":SVC()
+        },    
+        {
+            "model_name":"RandomForestClassifier",
+            "model_obj":RandomForestClassifier()
+        }
 
     ]
 
@@ -50,40 +66,34 @@ def solve_class_problem(data_features, data_target, cv, model, encoder_data):
         y_test_fold = data_target[test_index]
         start_timer = time.time()
         
-
         # apply categorical encoder
         encoder_obj = encoder_data['encoder_obj']
+        log.info(f'Fitting the encoder')
         encoder_obj = encoder_obj.fit(X_train_fold, y_train_fold)
-        #print("---------- before X_train_fold encoded ----------")
-        #print(X_train_fold.head(10))
+        log.info(f'Transforming data for X_train_fold by the encoder')
         X_train_fold = encoder_obj.transform(X_train_fold, y_train_fold)
-        #print("---------- after X_train_fold encoded ----------")
-        #print(X_train_fold.head(10))
+        X_train_fold=X_train_fold.fillna(X_train_fold.mean())
         
         # train model
         model_obj = model['model_obj']
+        log.info(f'Fitting the model')
         model_obj.fit(X_train_fold, y_train_fold)
         
         # apply encoder transform to X Test
-        #print("---------- before X_test_fold encoded ----------")
-        #print(X_test_fold.head(10))
+        log.info("Transforming data for X_test_fold by the encoder")
         X_test_fold = encoder_obj.transform(X_test_fold)
-        #print("---------- after X_test_fold encoded ----------")
-        #print(X_test_fold.head(10))
+        X_test_fold=X_test_fold.fillna(X_test_fold.mean())
+        
 
         y_pred = model_obj.predict(X_test_fold) 
         end_timer = time.time()
         elapsed_time = end_timer - start_timer
         f1_score_results.append(f1_score(y_pred, y_test_fold))
         elapsed_times.append(elapsed_time)
-        #f1_score_mean.append(f1_score(y_pred, y_test_fold))
         # increment counter
         fold_counter+=1
 
-    #print("------ f1 result ")
-    #print(f1_score_results)
     f1_score_results_mean = mean(f1_score_results)
     avg_elapsed_time = mean(elapsed_times)
     
-    #print(f1_score_results_mean)
     return f1_score_results_mean, avg_elapsed_time

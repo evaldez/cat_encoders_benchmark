@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,RandomForestClassifier,RandomEncoder,0.6648994547293318,1.8315613269805908,2022-08-09 15:39:30

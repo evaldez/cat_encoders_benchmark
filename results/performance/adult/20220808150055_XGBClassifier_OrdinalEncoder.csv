@@ -1,2 +1,0 @@
-dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
-adult,XGBClassifier,OrdinalEncoder,0.7105195156097182,0.9047013918558756,2022-08-08 15:00:55

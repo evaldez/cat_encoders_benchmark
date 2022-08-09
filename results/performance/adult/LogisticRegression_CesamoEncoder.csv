@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,LogisticRegression,CesamoEncoder,0.5557657411161562,0.27605422337849933,2022-08-09 15:28:25

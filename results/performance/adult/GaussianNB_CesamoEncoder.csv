@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,GaussianNB,CesamoEncoder,0.4336836530538159,0.0617369810740153,2022-08-09 15:26:59

@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,MLPClassifier,TargetEncoder,0.6663812827023423,6.885013977686564,2022-08-09 15:48:27

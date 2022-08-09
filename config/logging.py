@@ -1,6 +1,6 @@
 import logging.config
 
-level='DEBUG'
+level='INFO'
 
 LOGGING_CONFIG = {
     'version': 1,

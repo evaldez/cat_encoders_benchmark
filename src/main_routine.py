@@ -28,9 +28,10 @@ def start_benchmark(problems_to_solve, encoders_to_use, models_to_use):
         cat_cols=metadata_dataset["cat_cols"]
         # load dataset in a dataframe
         raw_df = data_manager.load_csv(metadata_dataset["relative_path_to_dataset"])
-        print(raw_df.info())
+        
         # clean_data
         df = data_manager.clean_data(raw_df, metadata_dataset)
+
         # split features and target
         features_data, target = data_manager.split_features_and_target(df)
         # estimate the number of columns to add for the case of based on OHE encoders
@@ -45,7 +46,7 @@ def start_benchmark(problems_to_solve, encoders_to_use, models_to_use):
 
         # set models
         models = model_manager.set(models_to_use)
-        #print(models)
+
         # solve the problem with each different model
         for model in models:
             # apply encoder
@@ -62,5 +63,4 @@ def start_benchmark(problems_to_solve, encoders_to_use, models_to_use):
                     general_config.path_to_performance_results    
                 )
 
-        # models
 

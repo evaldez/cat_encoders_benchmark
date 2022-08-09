@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,LogisticRegression,TargetEncoder,0.6390909525904084,0.36323897043863934,2022-08-09 15:48:29

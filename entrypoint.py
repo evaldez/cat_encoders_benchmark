@@ -5,26 +5,33 @@ warnings.filterwarnings("ignore")
 
 def main():
     # log level
-    os.environ["LOG_LEVEL"] = "DEBUG"
-
+    # os.environ["LOG_LEVEL"] = "INFO"
 
     problems_to_solve=[
-        'adult'
+        #'adult',
+        'cat_in_the_data'
     ]
     encoders_to_use = [
-        #'OrdinalEncoder',
+        'OrdinalEncoder',
         #'OneHotEncoder',
-        #'CatBoostEncoder',
-        'CesamoEncoder'
+        'CatBoostEncoder',
+        #'CesamoEncoder',
+        'RandomEncoder',
+        'TargetEncoder'
     ]
     models_to_use=[
-        'XGBClassifier',
+        #'XGBClassifier',
         #'MLPClassifier',
+        #'GaussianNB',
+        'LogisticRegression',
+        #'SVC',
+        'RandomForestClassifier'
+
     ]
     main_routine.start_benchmark(
-        problems_to_solve,
-        encoders_to_use,
-        models_to_use
+            problems_to_solve,
+            encoders_to_use,
+            models_to_use
        )
 
 if __name__ == '__main__':

@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,GaussianNB,TargetEncoder,0.6279524876321023,0.23558664321899414,2022-08-09 15:48:28

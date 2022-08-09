@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+cat_in_the_data,GaussianNB,OrdinalEncoder,0.21916345051655794,1.38045334815979,2022-08-09 17:19:20

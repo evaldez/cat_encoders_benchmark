@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,GaussianNB,CatBoostEncoder,0.6276414515422915,0.12482595443725586,2022-08-09 15:26:59

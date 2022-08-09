@@ -23,24 +23,35 @@ def clean_data(df, dataset_config):
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     # set target
     df["target"] = df[dataset_config["target"]] == dataset_config['positive_values_are_represented_by']
-    df.drop([dataset_config["target"]] + dataset_config["time_cols"] + dataset_config["id_cols"]+ dataset_config["cols_to_delete"], axis=1, inplace=True)
+    # if target col is already called target, cannot be deleted
+    delete_original_target_col = []
+    if dataset_config["target"] != "target":
+        delete_original_target_col = [dataset_config["target"]]
+    df.drop( delete_original_target_col + dataset_config["time_cols"] + dataset_config["id_cols"]+ dataset_config["cols_to_delete"], axis=1, inplace=True)
     # remove nan values
     df.dropna(axis=0, inplace=True)
     # remove empty strings or only spaces
     df.replace(r'^\s*$', np.nan, regex=True, inplace=True)
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
     # scale num cols
-    print(df[dataset_config['num_cols']].head(10))
     mms = MinMaxScaler()
-    df[dataset_config['num_cols']] = mms.fit_transform(df[dataset_config['num_cols']])
+
+    if dataset_config['num_cols']:
+        df[dataset_config['num_cols']] = mms.fit_transform(df[dataset_config['num_cols']])
+    
+    # convert cat cols to Object (strings)
+    for cat_col in dataset_config["cat_cols"]:
+        df[cat_col] =  df[cat_col].astype(str)
+
     return df
 
 def split_features_and_target(data):
+    print(data.info())
     data_features=data.drop(["target"], axis=1)
     data_target = data["target"].to_numpy()
     return data_features, data_target 
 
-def save_results(dataset_name, model_name, encoder_name, f1_score, elapsed_time, path_to_dir):
+def save_results(dataset_name, model_name, encoder_name, f1_score, elapsed_time, path_to_dir, overwrite=True):
 
     path = os.path.join(path_to_dir, dataset_name)
     # Check whether the specified path exists or not
@@ -61,7 +72,11 @@ def save_results(dataset_name, model_name, encoder_name, f1_score, elapsed_time,
     current_date=datetime.now().strftime("%Y%m%d%H%M%S")
     df = pd.DataFrame(result)
     # save dataframe
-    result_file_name = f'{current_date}_{model_name}_{encoder_name}.csv'
+    result_file_name=None
+    if overwrite:
+        result_file_name = f'{model_name}_{encoder_name}.csv'
+    else:
+        result_file_name = f'{current_date}_{model_name}_{encoder_name}.csv'
     final_path_and_name=os.path.join(path, result_file_name)
     df.to_csv(final_path_and_name, index=False)
     log.info(f'Resuls saved in {final_path_and_name}')

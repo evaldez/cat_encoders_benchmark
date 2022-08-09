@@ -6,20 +6,10 @@ log=set_logger()
 import random
 import pandas as pd
 from random import randint
-import numpy
 import math
-import logging.config
-# Shapiro-Wilk Test
-from numpy.random import seed
-from numpy.random import randn
-from scipy.stats import shapiro
-import random
-from random import randint
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-from sklearn.utils import validation
 import numpy as np
 import os
 import json
@@ -33,7 +23,7 @@ class CesamoEncoder():
         self.encoded_metadata = {}
         self.cols = cols
         #self.min_error = 0.01269614407
-        self.stop_on_accepted_error=True
+        self.stop_on_accepted_error=False
         #self.min_error = 0.05
         self.min_error = 0.5
         self.iter_limit = 10000
@@ -54,14 +44,20 @@ class CesamoEncoder():
         """
         # check for cache
         dataset_name=None
+        cache=None
         if "DATASET_NAME" in os.environ:
+            log.info("Looking for cache data")
             dataset_name=os.environ["DATASET_NAME"]
-        """
-        cache = self.check_for_cache(os.environ["DATASET_NAME"])
-        if cache:
+            cache = self.check_for_cache(os.environ["DATASET_NAME"])
+
+        else: 
+            log.info("env var DATASET_NAME not found, cannot apply for cache")
+        
+        if cache and dataset_name:
             self.code_and_errors = cache
+
             return self
-        """
+        
         stop_condition = False
         all_features=X.columns
         log.debug(f'all_features: {all_features}')
@@ -185,7 +181,7 @@ class CesamoEncoder():
         """
         Calculate average
         """
-        return numpy.mean(numbers) 
+        return np.mean(numbers) 
 
     # normality test
     def check_if_gaussian(self, data):
@@ -290,15 +286,17 @@ class CesamoEncoder():
         files_name = [ x.replace('.json','') for x in files ]
         
         # if not, return empty dict
-        if dataset_name not in files_name: return {}
+        if dataset_name not in files_name: 
+            log.info(f'cache NOT found for dataset')
+            return {}
 
+        log.info(f'cache found for dataset')
         json_to_load = cache_base_path + dataset_name + '.json'
         # if exists, load the json into a dict
         with open(json_to_load, 'r') as jsonFile:
             jsonObject = json.load(jsonFile)
             jsonFile.close()
         
-        log.info("codes and error founds")
 
         return jsonObject
     

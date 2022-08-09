@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+cat_in_the_data,XGBClassifier,TargetEncoder,0.5242023628291347,8.544742981592814,2022-08-09 17:03:00

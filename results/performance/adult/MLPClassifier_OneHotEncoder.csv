@@ -1,0 +1,2 @@
+dataset_name,model_name,encoder_name,f1_score,elapsed_time,exec_date
+adult,MLPClassifier,OneHotEncoder,0.6430281192931575,30.798303683598835,2022-08-09 15:21:29
