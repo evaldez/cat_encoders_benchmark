@@ -13,19 +13,19 @@ def main():
     ]
     encoders_to_use = [
         'OrdinalEncoder',
-        #'OneHotEncoder',
+        'OneHotEncoder',
         'CatBoostEncoder',
         #'CesamoEncoder',
         'RandomEncoder',
         'TargetEncoder'
     ]
     models_to_use=[
-        #'XGBClassifier',
+        'XGBClassifier',
         #'MLPClassifier',
         #'GaussianNB',
-        'LogisticRegression',
+        #'LogisticRegression',
         #'SVC',
-        'RandomForestClassifier'
+        #'RandomForestClassifier'
 
     ]
     main_routine.start_benchmark(
