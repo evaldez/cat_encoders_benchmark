@@ -1,0 +1,22 @@
+{
+    "dataset_name":"titanic",
+    "relative_path_to_dataset":"./datasets/titanic/train_dataset.csv",
+    "id_cols": ["PassengerId","Name"],
+    "cat_cols": [
+        "Sex", 
+        "Ticket", 
+        "Cabin", 
+        "Embarked"
+    ],
+    "num_cols" : [
+        "Pclass",
+        "Age",
+        "SibSp",
+        "Parch",
+        "Fare"
+    ],
+    "cols_to_delete":[],
+    "time_cols": [],
+    "target":"Survived",
+    "positive_values_are_represented_by": 1
+}
